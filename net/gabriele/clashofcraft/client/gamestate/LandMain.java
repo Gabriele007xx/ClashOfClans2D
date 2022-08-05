@@ -20,6 +20,7 @@ public class LandMain extends State{
     public static int WOOD = 0;
     public static int IRON = 0;
     public static int NUMBER_OF_BUILDERS = 2;
+    public static int CURRENT_BUILDING_SELECTION = -1;
     public static ArrayList<Building> buildings = new ArrayList<>();
     public LandMain()
     {
