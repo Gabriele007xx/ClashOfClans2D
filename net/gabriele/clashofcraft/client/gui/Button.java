@@ -2,6 +2,7 @@ package net.gabriele.clashofcraft.client.gui;
 
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 
 public class Button {
@@ -43,10 +44,10 @@ public class Button {
         target.draw(shape);
         target.draw(text);
     }
-    public void update(Vector2f mousepos)
+    public void update(Vector2i mousepos)
     {
         this.state = ButtonState.IDLE;
-        if(this.shape.getGlobalBounds().contains(mousepos))
+        if(this.shape.getGlobalBounds().contains(new Vector2f(mousepos)))
         {
             this.state = ButtonState.HOVER;
             if(Mouse.isButtonPressed(Mouse.Button.LEFT))
