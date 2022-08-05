@@ -35,7 +35,7 @@ public class ProgressBarElement {
     /**
      * Imposta la percentuale della barra.
      * @param number il numero attuale delle risorse
-     * @param number_max il numero amssimo delle risorse
+     * @param number_max il numero massimo delle risorse
      */
     public void setPercent(int number, int number_max)
     {
