@@ -4,7 +4,8 @@ import net.gabriele.clashofcraft.client.gamestate.LandMain;
 import net.gabriele.clashofcraft.client.gamestate.State;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Texture;
-import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.event.Event;
 
@@ -15,7 +16,7 @@ import java.util.Stack;
 
 public class Coc {
     private RenderWindow window;
-    private Vector2f mouseX_Y;
+    private Vector2i mouseX_Y;
     private String title = "Clash";
     public Stack<State> states = new Stack<>();
     public static HashMap<String, Texture> itemtextures = new HashMap<>();
@@ -40,6 +41,7 @@ public class Coc {
     }
     public void update()
     {
+        mouseX_Y = Mouse.getPosition(window);
         for(Event event : window.pollEvents())
         {
             switch(event.type)
@@ -49,7 +51,7 @@ public class Coc {
                     break;
             }
         }
-        states.lastElement().update();
+        states.lastElement().update(mouseX_Y);
     }
      public void updatedt()
      {
