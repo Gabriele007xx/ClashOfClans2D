@@ -1,9 +1,13 @@
 package net.gabriele.clashofcraft.client.gui;
 
 import net.gabriele.clashofcraft.client.gamestate.LandMain;
+import net.gabriele.clashofcraft.client.gui.screen.InfoWindow;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -17,13 +21,62 @@ public class Hotbar {
     public Hotbar()
     {
         initTextures();
-        buttons.add(new ImageButton(0,640,80,80,textures.get("info")));
+        buttons.add(new ImageButton(0,640,80,80,textures.get("info")
+        ){
+            @Override
+            public void update(Vector2i moupos) {
+                if(sprite.getGlobalBounds().contains(new Vector2f(moupos)))
+                {
+                    if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+                    {
+                        if(LandMain.CURRENT_BUILDING_SELECTION != -1)
+                        {
+                            InfoWindow window = new InfoWindow(600,300,getATitle(LandMain.CURRENT_BUILDING_SELECTION),getTex(LandMain.CURRENT_BUILDING_SELECTION),getDesc(LandMain.CURRENT_BUILDING_SELECTION));
+                            LandMain.windows.add(window);
+                        }
+                    }
+                }
+            }
+            private Texture getTex(int ID)
+            {
+                switch(ID)
+                {
+                    case 0:
+                        return LandMain.buildings.get(0).getTexture();
+                    case 1:
+                        return LandMain.buildings.get(1).getTexture();
+                }
+                return null;
+            }
+            private String getATitle(int ID)
+            {
+                switch(ID)
+                {
+                    case 0:
+                        return "Town Hall";
+                    case 1:
+                        return "House";
+                }
+                return null;
+            }
+            private String getDesc(int ID)
+            {
+                switch(ID)
+                {
+                    case 0:
+                        return "TOWN_HALL_DESC";
+                    case 1:
+                        return "HOUSE_DESC";
+                }
+                return null;
+            }
+        });
         buttons.add(new ImageButton(1200,640,80,80,textures.get("map")));
         progress.add(new ProgressBarElement(120, Color.WHITE, Color.BLACK,20,1150,10));
         progress.add(new ProgressBarElement(120, Color.WHITE, Color.YELLOW,20,1150,40));
         progress.add(new ProgressBarElement(120, Color.WHITE, Color.BLUE,20,1150,70));
     }
-    public void update()
+    public void update(Vector2i mousepos)
     {
             progress.get(0).setPercent(LandMain.STONE,20);
             progress.get(1).setPercent(LandMain.WOOD,20);
@@ -31,6 +84,10 @@ public class Hotbar {
             for(ProgressBarElement p : progress)
             {
                 p.update();
+            }
+            for(ImageButton imgbutton : buttons)
+            {
+                imgbutton.update(mousepos);
             }
     }
     public void render(RenderTarget target)
