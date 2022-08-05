@@ -5,6 +5,7 @@ import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 
 public abstract class Building {
@@ -47,11 +48,20 @@ public abstract class Building {
     {
         target.draw(this.sprite);
     }
-    public void update()
+    public void update(Vector2i mouse)
     {
-       if(sprite.getGlobalBounds().contains(new Vector2f(Mouse.getPosition().x,Mouse.getPosition().y)))
+       if(sprite.getGlobalBounds().contains(new Vector2f(mouse)))
        {
-           LandMain.CURRENT_BUILDING_SELECTION = this.getID();
+           if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+           {
+               LandMain.CURRENT_BUILDING_SELECTION = this.getID();
+               System.out.println("Impostato l'ID slezione a " + this.getID());
+           }
+
        }
+    }
+
+    public Texture getTexture() {
+        return texture;
     }
 }
