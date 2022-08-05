@@ -1,8 +1,11 @@
 package net.gabriele.clashofcraft.client.buildings;
 
+import net.gabriele.clashofcraft.client.gamestate.LandMain;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2f;
+import org.jsfml.window.Mouse;
 
 public abstract class Building {
     protected int MAX_LEVEL;
@@ -46,6 +49,9 @@ public abstract class Building {
     }
     public void update()
     {
-
+       if(sprite.getGlobalBounds().contains(new Vector2f(Mouse.getPosition().x,Mouse.getPosition().y)))
+       {
+           LandMain.CURRENT_BUILDING_SELECTION = this.getID();
+       }
     }
 }
