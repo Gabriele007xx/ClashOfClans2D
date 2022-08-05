@@ -60,4 +60,5 @@ public class TownHallBuilding extends Building {
         }
         level_texture.put("0",lvl1);
     }
+
 }
