@@ -1,6 +1,5 @@
 package net.gabriele.clashofcraft.client.gui.screen;
 
-import net.gabriele.clashofcraft.client.gamestate.LandMain;
 import net.gabriele.clashofcraft.client.gui.ImageButton;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.RectangleShape;
@@ -36,7 +35,7 @@ public abstract class Window {
                 {
                     if(Mouse.isButtonPressed(Mouse.Button.LEFT))
                     {
-                        setClosed();
+                        Window.this.setClosed();
                     }
                 }
             }
@@ -54,7 +53,7 @@ public abstract class Window {
     }
 
     public void setClosed() {
-        isClosed = true;
+        this.isClosed = true;
     }
 
     public boolean isClosed() {
@@ -65,8 +64,8 @@ public abstract class Window {
         target.draw(window);
         CLOSE.render(target);
     }
-    public void update()
+    public void update(Vector2i mouse)
     {
-
+        CLOSE.update(mouse);
     }
 }
