@@ -4,9 +4,11 @@ import net.gabriele.clashofcraft.client.Coc;
 import net.gabriele.clashofcraft.client.buildings.Building;
 import net.gabriele.clashofcraft.client.buildings.townhall.TownHallBuilding;
 import net.gabriele.clashofcraft.client.gui.Hotbar;
+import net.gabriele.clashofcraft.client.gui.screen.Window;
 import net.gabriele.clashofcraft.client.land.World;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2i;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -22,6 +24,7 @@ public class LandMain extends State{
     public static int NUMBER_OF_BUILDERS = 2;
     public static int CURRENT_BUILDING_SELECTION = -1;
     public static ArrayList<Building> buildings = new ArrayList<>();
+    public static ArrayList<Window> windows = new ArrayList<>();
     public LandMain()
     {
         try {
@@ -35,11 +38,11 @@ public class LandMain extends State{
     }
 
     @Override
-    public void update() {
-        hotbar.update();
+    public void update(Vector2i mousepos) {
+        hotbar.update(mousepos);
         for(Building b : buildings)
         {
-            b.update();
+            b.update(mousepos);
         }
         world.update();
     }
@@ -52,5 +55,12 @@ public class LandMain extends State{
             b.render(target);
         }
         hotbar.render(target);
+        for(Window w : windows)
+        {
+            if(!w.isClosed())
+            {
+                w.render(target);
+            }
+        }
     }
 }
