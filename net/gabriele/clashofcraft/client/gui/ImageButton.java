@@ -1,6 +1,11 @@
 package net.gabriele.clashofcraft.client.gui;
 
+import net.gabriele.clashofcraft.client.gamestate.LandMain;
+import net.gabriele.clashofcraft.client.gui.screen.InfoWindow;
 import org.jsfml.graphics.*;
+import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 
 public class ImageButton extends Button{
     protected Sprite sprite = new Sprite();
@@ -19,5 +24,10 @@ public class ImageButton extends Button{
     @Override
     public void render(RenderTarget target) {
         target.draw(sprite);
+    }
+
+    @Override
+    public void update(Vector2i mousepos) {
+
     }
 }
