@@ -1,6 +1,7 @@
 package net.gabriele.clashofcraft.client.buildings;
 
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2i;
 
 public class HouseBuilding0 extends Building{
     public HouseBuilding0(Texture texture, int x, int y) {
@@ -18,8 +19,8 @@ public class HouseBuilding0 extends Building{
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(Vector2i m) {
+        super.update(m);
     }
 
     /**
